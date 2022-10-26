@@ -1,5 +1,7 @@
 import random
 
+#En liten kommentar :)
+
 Huset = ["Barathoen", "Stark", "Lannister", "Tyrell", "Martell", "Tully", "Arryn", "Targaryen"]     #Vilken familj (kungarike) du föds in i väljs här!
 
 Huset = random.choice(Huset)  

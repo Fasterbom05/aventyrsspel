@@ -120,7 +120,7 @@ def strid(Huvudperson, Monster, vapen_styrka):
     
     return Huvudperson, Monster #bug: skriver inte ut korrekt Hp efter strid 
 
-#-----------------------------------------------------------------------------
+
 
 def visa_instruktioner():
     print('''
@@ -131,6 +131,8 @@ def visa_instruktioner():
     
     ''')
     return print
+
+#-----------------------------------------------------------------------------
 
 print(input(f'''
 {Huvudperson}

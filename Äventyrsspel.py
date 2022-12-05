@@ -51,7 +51,7 @@ def nivå_check(Huvudperson,xp,xp_tot,nivå):
         Huvudperson.nivå =+ 1
         print(f"lvl up {Huvudperson.nivå}")
     else:
-        print("fel")
+        print("funktion booorgirnivåcheck")
     
 
 def item_styrka(Item):
@@ -65,10 +65,15 @@ bra_pilbåge = Item_vapen("Bra pilbåge", 7)
 bra_yxa = Item_vapen("Bra yxa", 8)
 yay_drakglas = Item_vapen("Drakglas", 0)
 
+healing_item_äpple = random.randint(1,10)
+healing_item_tårta = random.randint(11,15)
+healing_item_monster = random.randint(16,30)
 
-äpple = Item_konsumerbart("Äpple", "Ett vanligt äpple" , 10)
-tårta = Item_konsumerbart("Tårta", "En vanlig tårta", 15)
-monter = Item_konsumerbart("Monster Energidricka", "Tillverkades av ingen annan än Andreas av Huset Puhakka" , 30)
+äpple = Item_konsumerbart("Äpple", "Ett vanligt äpple" , healing_item_äpple)
+tårta = Item_konsumerbart("Tårta", "En vanlig tårta", healing_item_tårta)
+monter = Item_konsumerbart("Monster Energidricka", "Tillverkades av ingen annan än Andreas, Albin av Huset Puhakka" , healing_item_monster)
+
+#------------------------------------------------------------------------------------------------------------
 
 namn = input("Skriv ditt namn --> ")
 
@@ -131,6 +136,20 @@ def visa_instruktioner():
     
     ''')
     return print
+
+def vilket_item(äpple, tårta, monter):
+    vilket_item_ok = random.randint(1,3)
+    if vilket_item_ok == 1:
+        print("Äpple")
+        return äpple
+    elif vilket_item_ok == 2:
+        print("Tårta")
+        return tårta
+    elif vilket_item_ok == 3:
+        print("Monster")
+        return monter
+    else:
+        print("Funktion boorgirvilkenitem")
 
 #-----------------------------------------------------------------------------
 
@@ -273,7 +292,7 @@ Du väljer att resa till {korrekt_var_resa(var_resa)}
 
         if spelar_plats == var_monster:
             if monster1.HP == 0 or "Drakglas" in Huvudperson.ryggsäck:
-                print("Du van spelet, bra gjort!")
+                print("Du vann spelet, bra gjort!")
                 break
             else:
                 Huvudperson, monster1 = strid(Huvudperson, monster1, vapen_styrka)
@@ -302,7 +321,8 @@ Du väljer att resa till {korrekt_var_resa(var_resa)}
             Huvudperson.ryggsäck.append("Drakglas")
 
         elif spelar_plats == var_kista:
-            print("Du hittade en kista!\n")
+
+            Huvudperson.ryggsäck.append(vilket_item())
 
         else:
             print("Det fanns inget här!\n")
@@ -312,7 +332,7 @@ Du väljer att resa till {korrekt_var_resa(var_resa)}
         continue
 
     elif var_resa == "end":
-        print("Du har valt att avsluta programmet")
+        print("Du har valt att avsluta spelet")
         break
 
     elif var_resa == "stats":

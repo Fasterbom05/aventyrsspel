@@ -71,7 +71,9 @@ healing_item_monster = random.randint(16,30)
 
 äpple = Item_konsumerbart("Äpple", "Ett vanligt äpple" , healing_item_äpple)
 tårta = Item_konsumerbart("Tårta", "En vanlig tårta", healing_item_tårta)
-monter = Item_konsumerbart("Monster Energidricka", "Tillverkades av ingen annan än Andreas, Albin av Huset Puhakka" , healing_item_monster)
+monter = Item_konsumerbart("Monster Energidricka", "Tillverkades av ingen annan än Andras, Albin av Huset Puhakka" , healing_item_monster)
+
+
 
 #------------------------------------------------------------------------------------------------------------
 
@@ -137,17 +139,17 @@ def visa_instruktioner():
     ''')
     return print
 
-def vilket_item(äpple, tårta, monter):
+def vilket_item():
     vilket_item_ok = random.randint(1,3)
     if vilket_item_ok == 1:
         print("Äpple")
-        return äpple
+        return Item_konsumerbart("Äpple", "Tom", healing_item_äpple)
     elif vilket_item_ok == 2:
         print("Tårta")
-        return tårta
+        return Item_konsumerbart("Tårta", "Tom", healing_item_tårta)
     elif vilket_item_ok == 3:
         print("Monster")
-        return monter
+        return Item_konsumerbart("Monter", "Tom", healing_item_monster)
     else:
         print("Funktion boorgirvilkenitem")
 
@@ -181,6 +183,8 @@ while True:
         
 Du valde vapnet Pilbåge.
 ''')
+
+     
         vilket_vapen = "Pilbåge"
         Huvudperson.ryggsäck.append("Pilbåge")
         print(f'''Din Ryggsäck:
@@ -232,7 +236,6 @@ platser = ["1", "2", "3", "4", "5", "6", "7"] #möjliga platser att resa till.
 
 var_fällor = random.choice(platser)
 var_drakglas = random.choice(platser)             
-i = 0
 
 def korrekt_var_resa(var_resa):
     if var_resa == "1":
@@ -252,18 +255,20 @@ def korrekt_var_resa(var_resa):
     else:
         print("Funktion borgirok")
 
+high_score = 0
+
 def spelet_är_slut():
     print(f'''
     
     Spelet är slut
 
-    Ditt score blev {i}
+    Ditt score blev {high_score}
 
     ''')
 #----------------------------------------------------------------------------
 
 while True:
-    i = 1 + i
+    high_score =+ 1 
     var_monster = random.choice(platser)
     var_kista = random.choice(platser) #fyller ingen funktion just nu
     monster1.styrka = monster1.styrka + 1
@@ -292,7 +297,7 @@ Du väljer att resa till {korrekt_var_resa(var_resa)}
 
         if spelar_plats == var_monster:
             if monster1.HP == 0 or "Drakglas" in Huvudperson.ryggsäck:
-                print("Du vann spelet, bra gjort!")
+                spelet_är_slut()
                 break
             else:
                 Huvudperson, monster1 = strid(Huvudperson, monster1, vapen_styrka)
@@ -321,8 +326,9 @@ Du väljer att resa till {korrekt_var_resa(var_resa)}
             Huvudperson.ryggsäck.append("Drakglas")
 
         elif spelar_plats == var_kista:
-
-            Huvudperson.ryggsäck.append(vilket_item())
+            print("Du hittade en kista")
+            time.sleep(3)
+            
 
         else:
             print("Det fanns inget här!\n")
@@ -340,7 +346,7 @@ Du väljer att resa till {korrekt_var_resa(var_resa)}
         HP: {Huvudperson.HP}
         Styrka: {Huvudperson.styrka} av Huset {Huvudperson.hus}
         Nivå: {Huvudperson.nivå}
-        Ryggsäck: {Huvudperson.ryggsäck} - {vapen_namn} , Vapensstyrka: {vapen_styrka}
+        Ryggsäck: {Huvudperson.print_items(Huvudperson,)} (Vapensstyrka: {vapen_styrka})
         Totalsyrka: {vapen_styrka + Huvudperson.styrka}
         ''')
         time.sleep(6)
@@ -352,4 +358,4 @@ Du väljer att resa till {korrekt_var_resa(var_resa)}
     else:
         print("loppen borgir")
 
-#-----------------------------------------------------------------------------
+#----------------------------------------------------------------------------

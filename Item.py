@@ -8,3 +8,4 @@ class Item_konsumerbart ():
         self.namn = namn
         self.beskrivning = beskrivning
         self.HP = HP
+
